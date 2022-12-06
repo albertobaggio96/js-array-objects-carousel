@@ -1,20 +1,3 @@
-// Milestone 0:
-// Popoliamo dinamicamente il contenuto del carosello con i dati forniti dall'array di oggetti,
-// dal js (dentro al nostro 'carousel-item', per capirci).
-// Milestone 1:
-// Al click dell'utente sulle frecce verso l'alto o verso il basso, l'immagine attiva diventerà visibile.
-// Milestone 2:
-// Aggiungiamo alla visualizzazione delle immagini anche titolo e testo relative alla singola immagine.
-// Bonus 1:
-// Aggiungere il ciclo infinito del carosello. Ovvero se l'immagine attiva è la prima e l'utente clicca la freccia verso l'alto,
-// l'immagine che deve attivarsi sarà l'ultima e viceversa per l'ultima immagine se l'utente clicca la freccia verso il basso.
-// Bonus 2:
-// Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
-// Bonus 3:
-// Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva
-// dovrà cambiare alla successiva.
-// Buon lavoro e buon divertimento!
-
 const images = [
    {
       image: 'img/01.webp',
@@ -43,13 +26,14 @@ const images = [
    }
 ];
 
-//*************** */ get element form DOM *************
+//*************** Get element form DOM *************
+
 const carouselImgElement= document.querySelector("div.carousel-image");
 const previousButton= document.querySelector(".previous");
 const nextButton= document.querySelector(".next");
 const carouselThumbnails= document.querySelector(".carousel-thumbnails");
 
-// ************ add element to DOM **************
+// ************ Add element to DOM **************
 
 images.forEach((image) => {
    
@@ -124,7 +108,7 @@ previousButton.addEventListener("click", function(){
    carouselsItemList[index].classList.add("active");
 })
 
-// ******************* thumbnail event ***********************
+// ******************* Thumbnail event ***********************
 
 thumbnailsImgList.forEach((img, index) => {
 
@@ -137,6 +121,8 @@ thumbnailsImgList.forEach((img, index) => {
       carouselsItemList[index].classList.add("active");
    })
 })
+
+// ********************* Set Interval *********************
 
 setInterval(() => {
    carouselsItemList.forEach((carouselItem) => {
@@ -151,18 +137,20 @@ setInterval(() => {
    carouselsItemList[index].classList.add("active");
 }, 3 * 1000);
 
-// ************** function *******************
+// ************** Function *******************
 
 function getNewElement(element){
    return document.createElement(element);
 }
 
 
-// function getCarousel(operation, condition, variable){
-//    [index].classList.toggle("active");
+// function getCarousel(operation, condition, variable, elements){
+//    elements.forEach((element) => {
+//       elements.classList.remove("active");
+//    })
 //    operation;
-//    if(index < condition){
+//    if(condition){
 //       index = variable;
 //    }
-//  [index].classList.toggle("active");
+//    elements[index].classList.add("active");
 // }
