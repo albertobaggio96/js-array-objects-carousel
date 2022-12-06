@@ -47,10 +47,12 @@ const images = [
 const carouselImgElement= document.querySelector("div.carousel-image");
 const previousButton= document.querySelector(".previous");
 const nextButton= document.querySelector(".next");
+const carouselThumbnails= document.querySelector(".carousel-thumbnails");
 
 
 images.forEach((image) => {
 
+   // jumbotron
    const divElement= getNewElement("div");
    divElement.classList.add("my_carousel-item")
 
@@ -67,13 +69,18 @@ images.forEach((image) => {
    const imgElement= getNewElement("img");
    imgElement.src= `${image.image}`;
 
-
-
    carouselImgElement.appendChild(divElement);
    divElement.appendChild(imgElement);
    divElement.appendChild(absoluteContainer);
    absoluteContainer.appendChild(titleElement);
    absoluteContainer.appendChild(pElement);
+
+   // carousel-thumbnails
+
+   const thumbnailsImg= getNewElement("img");
+   thumbnailsImg.src= `${image.image}`;
+
+   carouselThumbnails.append(thumbnailsImg);
 })
 
 console.log(images.length);
