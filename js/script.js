@@ -51,62 +51,80 @@ const carouselThumbnails= document.querySelector(".carousel-thumbnails");
 
 
 images.forEach((image) => {
-
+   
    // jumbotron
    const divElement= getNewElement("div");
    divElement.classList.add("my_carousel-item")
-
+   
    const absoluteContainer = getNewElement("div");
    absoluteContainer.classList.add("position-absolute", "top-50", "start-50", "translate-middle", "text-white", "bg-dark", "bg-opacity-50");
-
-
+   
+   
    const titleElement= getNewElement("h2");
    titleElement.append(image.title);
-
+   
    const pElement= getNewElement("p");
    pElement.append(image.text);
-
+   
    const imgElement= getNewElement("img");
    imgElement.src= `${image.image}`;
-
+   
    carouselImgElement.appendChild(divElement);
    divElement.appendChild(imgElement);
    divElement.appendChild(absoluteContainer);
    absoluteContainer.appendChild(titleElement);
    absoluteContainer.appendChild(pElement);
-
+   
    // carousel-thumbnails
-
+   
    const thumbnailsImg= getNewElement("img");
    thumbnailsImg.src= `${image.image}`;
-
+   thumbnailsImg.classList.add("thumbnail-img-list");
+   
    carouselThumbnails.append(thumbnailsImg);
 })
 
 console.log(images.length);
 
-const carouselItem = document.querySelectorAll(".my_carousel-item");
+const thumbnailsImgList= document.querySelectorAll(".thumbnail-img-list");
+const carouselsItemList = document.querySelectorAll(".my_carousel-item");
+
+thumbnailsImgList.forEach((img, index) => {
+   img.addEventListener("click", function(){
+      carouselsItemList.forEach((carouselItem) => {
+         carouselItem.classList.remove("active")
+      })
+      carouselsItemList[index].classList.add("active");
+   })
+})
+
+
 
 let index = 0;
 
-carouselItem[index].classList.add("active");
+carouselsItemList[index].classList.add("active");
+
 
 nextButton.addEventListener("click", function (){
-   carouselItem[index].classList.toggle("active");
+   carouselsItemList.forEach((carouselItem) => {
+      carouselItem.classList.remove("active")
+   })
    index ++;
    if(index > images.length-1){
       index = 0;
    }
-   carouselItem[index].classList.toggle("active");
+   carouselsItemList[index].classList.add("active");
 })
 
 previousButton.addEventListener("click", function(){
-   carouselItem[index].classList.toggle("active");
+   carouselsItemList.forEach((carouselItem) => {
+      carouselItem.classList.remove("active")
+   })
    index --;
    if(index < 0){
       index = images.length-1;
    }
-   carouselItem[index].classList.toggle("active");
+   carouselsItemList[index].classList.add("active");
 })
 
 // ************** function *******************
@@ -116,10 +134,10 @@ function getNewElement(element){
 }
 
 // function getCarousel(operation, condition, variable){
-//    carouselItem[index].classList.toggle("active");
+//    [index].classList.toggle("active");
 //    operation;
 //    if(index < condition){
 //       index = variable;
 //    }
-//    carouselItem[index].classList.toggle("active");
+//  [index].classList.toggle("active");
 // }
