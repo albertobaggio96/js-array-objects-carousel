@@ -54,43 +54,65 @@ images.forEach((image) => {
    const divElement= getNewElement("div");
    divElement.classList.add("my_carousel-item")
 
+   const absoluteContainer = getNewElement("div");
+   absoluteContainer.classList.add("position-absolute", "top-50", "start-50", "translate-middle", "text-white", "bg-dark", "bg-opacity-50");
+
+
+   const titleElement= getNewElement("h2");
+   titleElement.append(image.title);
+
+   const pElement= getNewElement("p");
+   pElement.append(image.text);
+
    const imgElement= getNewElement("img");
    imgElement.src= `${image.image}`;
 
+
+
    carouselImgElement.appendChild(divElement);
    divElement.appendChild(imgElement);
+   divElement.appendChild(absoluteContainer);
+   absoluteContainer.appendChild(titleElement);
+   absoluteContainer.appendChild(pElement);
 })
 
-console.log(images.length)
+console.log(images.length);
 
-const carouselItem = document.querySelectorAll(".my_carousel-item")
+const carouselItem = document.querySelectorAll(".my_carousel-item");
 
-let index = 0
+let index = 0;
 
 carouselItem[index].classList.add("active");
 
-nextButton.addEventListener("click", function(){
-   carouselItem[index].classList.toggle("active")
+nextButton.addEventListener("click", function (){
+   carouselItem[index].classList.toggle("active");
    index ++;
    if(index > images.length-1){
-      index = 0
+      index = 0;
    }
-   carouselItem[index].classList.toggle("active")
+   carouselItem[index].classList.toggle("active");
 })
 
 previousButton.addEventListener("click", function(){
-   carouselItem[index].classList.toggle("active")
+   carouselItem[index].classList.toggle("active");
    index --;
    if(index < 0){
-      index = images.length-1
+      index = images.length-1;
    }
-   carouselItem[index].classList.toggle("active")
+   carouselItem[index].classList.toggle("active");
 })
-
-
 
 // ************** function *******************
 
 function getNewElement(element){
    return document.createElement(element);
 }
+
+// function getCarousel(operation, condition, variable){
+//    carouselItem[index].classList.toggle("active");
+//    operation;
+//    if(index < condition){
+//       index = variable;
+//    }
+//    carouselItem[index].classList.toggle("active");
+// }
