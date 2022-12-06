@@ -43,12 +43,13 @@ const images = [
    }
 ];
 
-// get element form DOM
+//*************** */ get element form DOM *************
 const carouselImgElement= document.querySelector("div.carousel-image");
 const previousButton= document.querySelector(".previous");
 const nextButton= document.querySelector(".next");
 const carouselThumbnails= document.querySelector(".carousel-thumbnails");
 
+// ************ add element to DOM **************
 
 images.forEach((image) => {
    
@@ -84,32 +85,25 @@ images.forEach((image) => {
    carouselThumbnails.append(thumbnailsImg);
 })
 
-console.log(images.length);
+// ******************** Get new crated element ********************
 
 const thumbnailsImgList= document.querySelectorAll(".thumbnail-img-list");
 const carouselsItemList = document.querySelectorAll(".my_carousel-item");
 
-thumbnailsImgList.forEach((img, index) => {
-   img.addEventListener("click", function(){
-      carouselsItemList.forEach((carouselItem) => {
-         carouselItem.classList.remove("active")
-      })
-      carouselsItemList[index].classList.add("active");
-   })
-})
-
-
+//******************* Button next and previous event **************
 
 let index = 0;
 
 carouselsItemList[index].classList.add("active");
 
-
 nextButton.addEventListener("click", function (){
+   
    carouselsItemList.forEach((carouselItem) => {
-      carouselItem.classList.remove("active")
+      carouselItem.classList.remove("active");
    })
+
    index ++;
+   
    if(index > images.length-1){
       index = 0;
    }
@@ -117,21 +111,52 @@ nextButton.addEventListener("click", function (){
 })
 
 previousButton.addEventListener("click", function(){
+   
    carouselsItemList.forEach((carouselItem) => {
-      carouselItem.classList.remove("active")
+      carouselItem.classList.remove("active");
    })
+   
    index --;
+   
    if(index < 0){
       index = images.length-1;
    }
    carouselsItemList[index].classList.add("active");
 })
 
+// ******************* thumbnail event ***********************
+
+thumbnailsImgList.forEach((img, index) => {
+
+   img.addEventListener("click", function(){
+
+      carouselsItemList.forEach((carouselItem) => {
+         carouselItem.classList.remove("active");
+      })
+
+      carouselsItemList[index].classList.add("active");
+   })
+})
+
+setInterval(() => {
+   carouselsItemList.forEach((carouselItem) => {
+      carouselItem.classList.remove("active");
+   })
+
+   index ++;
+   
+   if(index > images.length-1){
+      index = 0;
+   }
+   carouselsItemList[index].classList.add("active");
+}, 3 * 1000);
+
 // ************** function *******************
 
 function getNewElement(element){
    return document.createElement(element);
 }
+
 
 // function getCarousel(operation, condition, variable){
 //    [index].classList.toggle("active");
