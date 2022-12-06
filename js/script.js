@@ -82,29 +82,27 @@ carouselsItemList[index].classList.add("active");
 
 nextButton.addEventListener("click", function (){
    
-   carouselsItemList.forEach((carouselItem) => {
-      carouselItem.classList.remove("active");
-   })
+   removeActiveClass();
 
    index ++;
    
    if(index > images.length-1){
       index = 0;
    }
+
    carouselsItemList[index].classList.add("active");
 })
 
 previousButton.addEventListener("click", function(){
    
-   carouselsItemList.forEach((carouselItem) => {
-      carouselItem.classList.remove("active");
-   })
+   removeActiveClass();
    
    index --;
    
    if(index < 0){
       index = images.length-1;
    }
+
    carouselsItemList[index].classList.add("active");
 })
 
@@ -114,9 +112,7 @@ thumbnailsImgList.forEach((img, index) => {
 
    img.addEventListener("click", function(){
 
-      carouselsItemList.forEach((carouselItem) => {
-         carouselItem.classList.remove("active");
-      })
+      removeActiveClass();
 
       carouselsItemList[index].classList.add("active");
    })
@@ -125,9 +121,8 @@ thumbnailsImgList.forEach((img, index) => {
 // ********************* Set Interval *********************
 
 setInterval(() => {
-   carouselsItemList.forEach((carouselItem) => {
-      carouselItem.classList.remove("active");
-   })
+   
+   removeActiveClass();
 
    index ++;
    
@@ -143,12 +138,18 @@ function getNewElement(element){
    return document.createElement(element);
 }
 
+function removeActiveClass(){
+   carouselsItemList.forEach((carouselItem) => {
+      carouselItem.classList.remove("active");
+   })
+}
 
 // function getCarousel(operation, condition, variable, elements){
-//    elements.forEach((element) => {
-//       elements.classList.remove("active");
-//    })
-//    operation;
+   
+//    removeActiveClass()
+
+//    index ++ ;
+
 //    if(condition){
 //       index = variable;
 //    }
