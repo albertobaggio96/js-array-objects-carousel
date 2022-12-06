@@ -69,6 +69,10 @@ images.forEach((image) => {
    carouselThumbnails.append(thumbnailsImg);
 })
 
+// ********************* Set Interval *********************
+
+let timingOnClick= setInterval(getNextImg, 3 * 1000);
+
 // ******************** Get new crated element ********************
 
 const thumbnailsImgList= document.querySelectorAll(".thumbnail-img-list");
@@ -81,56 +85,35 @@ let index = 0;
 carouselsItemList[index].classList.add("active");
 
 nextButton.addEventListener("click", function (){
-   
-   removeActiveClass();
 
-   index ++;
-   
-   if(index > images.length-1){
-      index = 0;
-   }
+   getNextImg();
 
-   carouselsItemList[index].classList.add("active");
+   clearInterval(timingOnClick);
+   timingOnClick= setInterval(getNextImg, 3 * 1000)
 })
 
 previousButton.addEventListener("click", function(){
    
-   removeActiveClass();
-   
-   index --;
-   
-   if(index < 0){
-      index = images.length-1;
-   }
+   getPreviousImg();
 
-   carouselsItemList[index].classList.add("active");
+   clearInterval(timingOnClick);
+   timingOnClick= setInterval(getNextImg, 3 * 1000)
 })
 
 // ******************* Thumbnail event ***********************
 
 thumbnailsImgList.forEach((img, index) => {
-
+   
    img.addEventListener("click", function(){
 
       removeActiveClass();
-
+      
       carouselsItemList[index].classList.add("active");
+
+      clearInterval(timingOnClick);
+      timingOnClick= setInterval(getNextImg, 3 * 1000)
    })
 })
-
-// ********************* Set Interval *********************
-
-setInterval(() => {
-   
-   removeActiveClass();
-
-   index ++;
-   
-   if(index > images.length-1){
-      index = 0;
-   }
-   carouselsItemList[index].classList.add("active");
-}, 3 * 1000);
 
 // ************** Function *******************
 
@@ -142,6 +125,29 @@ function removeActiveClass(){
    carouselsItemList.forEach((carouselItem) => {
       carouselItem.classList.remove("active");
    })
+}
+
+function getNextImg (){
+   removeActiveClass();
+   index ++;
+   
+   if(index > images.length-1){
+      index = 0;
+   }
+
+   carouselsItemList[index].classList.add("active")
+}
+
+function getPreviousImg (){
+   removeActiveClass();
+   
+   index --;
+   
+   if(index < 0){
+      index = images.length-1;
+   }
+
+   carouselsItemList[index].classList.add("active");
 }
 
 // function getCarousel(operation, condition, variable, elements){
