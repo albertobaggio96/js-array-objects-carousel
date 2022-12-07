@@ -121,10 +121,8 @@ function getNewElement(element){
    return document.createElement(element);
 }
 
-function removeActiveClass(){
-   carouselsItemList.forEach((carouselItem) => {
-      carouselItem.classList.remove("active");
-   })
+function removeActiveClass (){
+   document.querySelector(".active").classList.remove("active")
 }
 
 function getNextImg (){
